@@ -1,0 +1,12 @@
+spring.application.name=todo-task
+#server.port=3030
+
+# DB Connection
+spring.datasource.url=jdbc:mysql://todotask-db.ccfekie0kwzd.us-east-1.rds.amazonaws.com:3306/todotask-db
+spring.datasource.username=admin
+spring.datasource.password=ToDoTaskDB
+
+# JPA
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect

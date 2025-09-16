@@ -1,0 +1,62 @@
+package com.todo.task.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.todo.task.model.TodoTask;
+import com.todo.task.repo.TodoTaskRepository;
+import com.todo.task.service.IToDoTaskService;
+
+@Service
+public class ToDoTaskServiceImpl implements IToDoTaskService {
+	
+	@Autowired
+	private TodoTaskRepository todoTaskRepository;
+
+	@Override
+    public List<TodoTask> getAllTodoTasks(String userId) {
+        return todoTaskRepository.findByUserId(userId);
+    }
+
+	@Override
+	public TodoTask getTodoTaskById(Long id) {
+		
+		return todoTaskRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public TodoTask createToDoTask(TodoTask todoTask) {
+		
+		return todoTaskRepository.save(todoTask);
+	}
+
+	@Override
+    public TodoTask updateToDoTask(Long id, TodoTask todoTask) {
+		TodoTask existing = todoTaskRepository.findById(id).orElse(null);
+	    if (existing == null) {
+	        throw new RuntimeException("Task not found with id " + id);
+	    }
+
+	    if (todoTask.getUserId() != null && !existing.getUserId().equals(todoTask.getUserId())) {
+	        throw new RuntimeException("UserId mismatch. Update not allowed.");
+	    }
+
+	    existing.setTitle(todoTask.getTitle());
+	    existing.setDescription(todoTask.getDescription());
+	    existing.setCompleted(todoTask.isCompleted());
+
+	    return todoTaskRepository.save(existing);
+    }
+
+
+	@Override
+	public void deleteToDoTaskById(Long id, String userId) {
+	    TodoTask existing = todoTaskRepository.findById(id).orElse(null);
+	    if (existing != null && userId != null && userId.equals(existing.getUserId())) {
+	        todoTaskRepository.deleteById(id);
+	    }
+	}
+
+}

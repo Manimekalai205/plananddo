@@ -1,0 +1,11 @@
+package com.todo.task.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.todo.task.model.TodoTask;
+
+public interface TodoTaskRepository extends JpaRepository<TodoTask, Long> {
+	
+	List<TodoTask> findByUserId(String userId);
+
+}

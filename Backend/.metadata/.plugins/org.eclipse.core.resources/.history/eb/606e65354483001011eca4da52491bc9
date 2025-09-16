@@ -1,0 +1,20 @@
+spring.application.name=todo-task
+server.port=8080
+server.address=0.0.0.0
+
+# DB Connection
+spring.datasource.url=jdbc:mysql://localhost:3306/todotaskdb
+spring.datasource.username=root
+spring.datasource.password=
+#spring.datasource.url=jdbc:mysql://todotask-db.ccfekie0kwzd.us-east-1.rds.amazonaws.com:3306/todotaskmysqldb
+#spring.datasource.username=admin
+#spring.datasource.password=ToDoTaskDB
+
+# JPA
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+
+# Connection pool (Hikari)
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=2

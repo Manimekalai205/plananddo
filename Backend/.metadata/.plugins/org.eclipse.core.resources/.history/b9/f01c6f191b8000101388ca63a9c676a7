@@ -1,0 +1,39 @@
+package com.todo.task.model;
+
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "todos")
+public class TodoTask {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String title;
+	private String description;
+	private boolean completed = false;
+	
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime createdAt;
+	
+    @CreatedBy
+	@Column(updatable = false)
+	private String createdBy; 
+
+    @LastModifiedDate
+	private LocalDateTime modifiedAt; 
+
+	@LastModifiedBy
+	private String modifiedBy;
+
+}
